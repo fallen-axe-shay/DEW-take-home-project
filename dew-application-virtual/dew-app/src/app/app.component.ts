@@ -18,8 +18,7 @@ export class AppComponent {
     NODES.push(
       {
         id: this.currentID++,
-        nodeOrLink: 'node',
-        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        nodeOrLink: 'node', 
         label: '',
         selectedOptions: [],
         noOfOptions: 0

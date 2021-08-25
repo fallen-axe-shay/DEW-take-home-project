@@ -10,12 +10,13 @@
         <div class="align-self-center flex-fill flex-wrap"> 
             <div [class.hide]="nodeLink.nodeOrLink === 'link'">
                 <label for="label">Label:</label> 
-                <input id="label" [(ngModel)]="nodeLink.label" placeholder="Label">
+                <input id="label" [(ngModel)]="nodeLink.label" placeholder="Label" (change)="onLabelChange(nodeLink)">
             </div>
             <div [class.hide]="nodeLink.nodeOrLink === 'node'">
                 <div class="d-flex flex-row flex-wrap">
-                    <div class="align-self-center" *ngFor="let option of nodeLink.options">
-                        <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, option)" [class.optionSelected]="nodeLink.selectedOptions.includes(option)">{{option}}</button>
+                    <div class="align-self-center" *ngFor="let item of options | keyvalue">
+                        <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, item.value)" [class.optionSelected]="nodeLink.selectedOptions.includes(item.value)">{{item.value}}</button>
+                        <!-- <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, item.value)" [class.optionSelected]="nodeLink.selectedOptions.includes(item.value)">{{item.value}}</button> -->
                     </div>
                 </div>
             </div>

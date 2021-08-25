@@ -21,31 +21,34 @@ export class NodeLinkFieldComponent implements OnInit {
   nodeLinks = NODES;
 
   constructor() { 
-    this.selectedOption = 'node';
-    this.noOfSelectedOption = 0;
-    this.selectedLabelOption = [];
+    this.options = {};
   }
 
   ngOnInit(): void {
   }
 
-  selectedOption?: string;
-  selectedLabelOption?: any;
-  noOfSelectedOption?: any;
+
+  options?: any;
+
+  onLabelChange(nodeLink: NodeLink): void {
+    if(nodeLink.label!='') {
+      for(let item in this.options) {
+        if(nodeLink.label == this.options[item]) {
+          nodeLink.label = '';
+          this.options[nodeLink.id] && delete this.options[nodeLink.id];
+        }
+      }
+      nodeLink.label && (this.options[nodeLink.id] = nodeLink.label);
+    } else {
+      this.options[nodeLink.id] && delete this.options[nodeLink.id];
+    }
+  } 
 
   onSelect(nodeLink: NodeLink, selection: string): void {
     nodeLink.nodeOrLink = selection;
-    // switch(selection) {
-    //   case 'node':
-    //     this.selectedOption = 'node';
-    //   break;
-    //   case 'link':
-    //     this.selectedOption = 'link';
-    //   break;
-    // }
   }
 
-  onSelectOption(nodeLink: NodeLink, selection: string): void {
+  onSelectOption(nodeLink: NodeLink, selection: any): void {
     if(nodeLink.selectedOptions.includes(selection)) {
       nodeLink.selectedOptions.splice(nodeLink.selectedOptions.indexOf(selection));
       nodeLink.noOfOptions--;
