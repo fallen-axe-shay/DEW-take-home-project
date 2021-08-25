@@ -1,0 +1,32 @@
+.btn {
+    margin: 5px;
+}
+
+.selected {
+    background-color: rgb(218, 91, 7);
+}
+
+.hide {
+    display: none;
+}
+
+
+.vl {
+    border-left: 1px solid rgb(156, 156, 156);
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+#label {
+    margin-left: 10px;
+}
+
+.optionSelected {
+    background-color: rgb(184, 36, 36);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px !important;
+    padding: 0px;
+}
