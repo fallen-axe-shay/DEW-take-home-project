@@ -2,10 +2,18 @@
 
 <div class="main">
   <div class="d-flex p-2 flex-row align-items-center">
-    <div class="frames align-self-start p-2"><h1>{{textFrameTitle}}</h1>
+    <div class="frames align-self-start p-2">
+      <div class="d-flex flex-row justify-content-between p-2">
+        <div class="align-self-center"><h1>{{textFrameTitle}}</h1></div>
+        <div class="align-self-center"><button class="btn btn-success" (click)="onAddBtnClick()">Add</button></div>
+      </div>
       <app-node-link-field></app-node-link-field>
     </div>
-    <div class="frames align-self-start p-2"><h1>{{diagramFrameTitle}}</h1></div>
+    <div class="frames align-self-start p-2">
+      <div class="d-flex flex-row justify-content-between p-2">
+        <div class="align-self-center"><h1>{{diagramFrameTitle}}</h1></div>
+      </div>
+    </div>
   </div>
 </div>
 

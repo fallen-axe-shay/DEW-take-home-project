@@ -1,22 +1,21 @@
 <ul *ngFor="let nodeLink of nodeLinks">
     <div class="d-flex p-2 flex-row">
         <div class="align-self-center">
-            <button type="button" class="btn btn-primary" [class.selected]="selectedOption === 'node'" (click)="onSelect('node')">Node</button>
+            <button type="button" class="btn btn-primary" [class.selected]="nodeLink.nodeOrLink === 'node'" (click)="onSelect(nodeLink, 'node')">Node</button>
         </div>
         <div class="align-self-center">
-            <button type="button" class="btn btn-primary" [class.selected]="selectedOption === 'link'" (click)="onSelect('link')">Link</button>
+            <button type="button" class="btn btn-primary" [class.selected]="nodeLink.nodeOrLink === 'link'" (click)="onSelect(nodeLink, 'link')">Link</button>
         </div>
         <div class="vl"></div>
         <div class="align-self-center flex-fill flex-wrap"> 
-            <div [class.hide]="selectedOption === 'link'">
+            <div [class.hide]="nodeLink.nodeOrLink === 'link'">
                 <label for="label">Label:</label> 
                 <input id="label" [(ngModel)]="nodeLink.label" placeholder="Label">
             </div>
-            <div [class.hide]="selectedOption === 'node'">
+            <div [class.hide]="nodeLink.nodeOrLink === 'node'">
                 <div class="d-flex flex-row flex-wrap">
                     <div class="align-self-center" *ngFor="let option of nodeLink.options">
-                        <button type="button" class="btn btn-secondary" (click)="onSelectOption(option)" [class.optionSelected]="selectedLabelOption.includes(option)">{{option}}</button>
-                        <!--  -->
+                        <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, option)" [class.optionSelected]="nodeLink.selectedOptions.includes(option)">{{option}}</button>
                     </div>
                 </div>
             </div>

@@ -33,8 +33,8 @@ export class NodeLinkFieldComponent implements OnInit {
   selectedLabelOption?: any;
   noOfSelectedOption?: any;
 
-  onSelect(selection: string): void {
-    this.selectedOption = selection;
+  onSelect(nodeLink: NodeLink, selection: string): void {
+    nodeLink.nodeOrLink = selection;
     // switch(selection) {
     //   case 'node':
     //     this.selectedOption = 'node';
@@ -45,19 +45,19 @@ export class NodeLinkFieldComponent implements OnInit {
     // }
   }
 
-  onSelectOption(selection: string): void {
-    if(this.selectedLabelOption.includes(selection)) {
-      this.selectedLabelOption.splice(this.selectedLabelOption.indexOf(selection));
-      this.noOfSelectedOption--;
+  onSelectOption(nodeLink: NodeLink, selection: string): void {
+    if(nodeLink.selectedOptions.includes(selection)) {
+      nodeLink.selectedOptions.splice(nodeLink.selectedOptions.indexOf(selection));
+      nodeLink.noOfOptions--;
     } else {
-      switch(this.noOfSelectedOption) {
+      switch(nodeLink.noOfOptions) {
         case 2:
-          this.selectedLabelOption[0] = this.selectedLabelOption[1];
-          this.selectedLabelOption[1] = selection;
+          nodeLink.selectedOptions[0] = nodeLink.selectedOptions[1];
+          nodeLink.selectedOptions[1] = selection;
           break;
         default:
-          this.selectedLabelOption.push(selection);
-          this.noOfSelectedOption++;
+          nodeLink.selectedOptions.push(selection);
+          nodeLink.noOfOptions++;
           break;
       }
     }

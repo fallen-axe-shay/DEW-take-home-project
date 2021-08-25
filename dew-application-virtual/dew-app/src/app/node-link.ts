@@ -1,6 +1,8 @@
 export interface NodeLink {
     id: number;
-    currentSelection: number;
+    nodeOrLink: string;
     options: Array<string>;
     label: string;
+    selectedOptions: Array<string>;
+    noOfOptions: number;
   }

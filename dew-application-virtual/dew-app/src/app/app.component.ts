@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NODES } from './nodeLinkList';
 
 
 @Component({
@@ -10,4 +11,19 @@ export class AppComponent {
   title = 'DEW App';
   textFrameTitle = 'Configure';
   diagramFrameTitle = 'Board';
+
+  currentID = 1;
+
+  onAddBtnClick(): void {
+    NODES.push(
+      {
+        id: this.currentID++,
+        nodeOrLink: 'node',
+        options: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+        label: '',
+        selectedOptions: [],
+        noOfOptions: 0
+      }
+    );
+  }
 }
