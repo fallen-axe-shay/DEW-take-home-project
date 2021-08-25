@@ -30,6 +30,15 @@ export class NodeLinkFieldComponent implements OnInit {
 
   options?: any;
 
+  removeField(nodeLink: NodeLink) {
+    for (var item = 0; item<NODES.length; item++) {
+      if(NODES[item].id==nodeLink.id) { 
+        NODES.splice(item, 1);
+        break;
+      }
+    }
+  }
+
   onLabelChange(nodeLink: NodeLink): void {
     if(nodeLink.label!='') {
       for(let item in this.options) {
@@ -50,7 +59,7 @@ export class NodeLinkFieldComponent implements OnInit {
 
   onSelectOption(nodeLink: NodeLink, selection: any): void {
     if(nodeLink.selectedOptions.includes(selection)) {
-      nodeLink.selectedOptions.splice(nodeLink.selectedOptions.indexOf(selection));
+      nodeLink.selectedOptions.splice(nodeLink.selectedOptions.indexOf(selection), 1);
       nodeLink.noOfOptions--;
     } else {
       switch(nodeLink.noOfOptions) {
