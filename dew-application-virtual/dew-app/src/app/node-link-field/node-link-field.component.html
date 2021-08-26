@@ -7,7 +7,7 @@
             <button type="button" class="btn btn-primary" [class.selected]="nodeLink.nodeOrLink === 'link'" (click)="onSelect(nodeLink, 'link')">Link</button>
         </div>
         <div class="vl"></div>
-        <div class="align-self-center flex-fill flex-wrap"> 
+        <div class="align-self-center flex-fill flex-wrap" style="max-width: 270px;"> 
             <div [class.hide]="nodeLink.nodeOrLink === 'link'">
                 <label for="label">Label:</label> 
                 <input id="label" [(ngModel)]="nodeLink.label" placeholder="Label" (change)="onLabelChange(nodeLink)">
@@ -16,13 +16,12 @@
                 <div class="d-flex flex-row flex-wrap">
                     <div class="align-self-center" *ngFor="let item of options | keyvalue">
                         <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, item.value)" [class.optionSelected]="nodeLink.selectedOptions.includes(item.value)">{{item.value}}</button>
-                        <!-- <button type="button" class="btn btn-secondary" (click)="onSelectOption(nodeLink, item.value)" [class.optionSelected]="nodeLink.selectedOptions.includes(item.value)">{{item.value}}</button> -->
                     </div>
                 </div>
             </div>
         </div>
         <div class="align-self-center justify-content-end">
-            <img src="../../assets/svg/circle-x.svg" style="height: 20px;" (click)="removeField(nodeLink)"/>
+            <img src="../../assets/svg/circle-x.svg" style="height: 20px; cursor: pointer;" (click)="removeField(nodeLink)"/>
         </div>
     </div>
 </ul>

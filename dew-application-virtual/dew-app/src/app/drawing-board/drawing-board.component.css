@@ -29,3 +29,7 @@ ul {
     margin: 0px !important;
     padding: 0px;
 }
+
+.hide {
+    display: none;
+}

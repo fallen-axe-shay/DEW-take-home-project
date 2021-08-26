@@ -2,6 +2,7 @@ import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { NodeLink } from '../node-link';
 import { NODES } from '../nodeLinkList';
+import { options } from '../nodeOptions';
 
 @Component({
   selector: 'app-node-link-field',
@@ -11,17 +12,12 @@ import { NODES } from '../nodeLinkList';
 
 
 export class NodeLinkFieldComponent implements OnInit {
-  // nodeLink: NodeLink = {
-  //     id: 1,
-  //     currentSelection: 0,
-  //     options: [],
-  //     label: ''
-  // }
+
 
   nodeLinks = NODES;
 
   constructor() { 
-    this.options = {};
+    this.options = options;
   }
 
   ngOnInit(): void {
@@ -31,30 +27,45 @@ export class NodeLinkFieldComponent implements OnInit {
   options?: any;
 
   removeField(nodeLink: NodeLink) {
+    var id = nodeLink.id;
     for (var item = 0; item<NODES.length; item++) {
       if(NODES[item].id==nodeLink.id) { 
         NODES.splice(item, 1);
         break;
       }
     }
+    for (var key in options) {
+      if(key == id.toString()) {
+        delete options[key];
+      }
+    }
   }
 
   onLabelChange(nodeLink: NodeLink): void {
     if(nodeLink.label!='') {
-      for(let item in this.options) {
-        if(nodeLink.label == this.options[item]) {
+      for(let item in options) {
+        if(nodeLink.label == options[item]) {
           nodeLink.label = '';
-          this.options[nodeLink.id] && delete this.options[nodeLink.id];
+          options[nodeLink.id] && delete options[nodeLink.id];
         }
       }
-      nodeLink.label && (this.options[nodeLink.id] = nodeLink.label);
+      nodeLink.label && (options[nodeLink.id] = nodeLink.label);
     } else {
-      this.options[nodeLink.id] && delete this.options[nodeLink.id];
+      options[nodeLink.id] && delete options[nodeLink.id];
     }
   } 
 
   onSelect(nodeLink: NodeLink, selection: string): void {
     nodeLink.nodeOrLink = selection;
+    if(selection == 'link') {
+      var id = nodeLink.id;
+      for (var key in options) {
+        if(key == id.toString()) {
+          delete options[key];
+        }
+      }
+      nodeLink.label = '';
+    }
   }
 
   onSelectOption(nodeLink: NodeLink, selection: any): void {

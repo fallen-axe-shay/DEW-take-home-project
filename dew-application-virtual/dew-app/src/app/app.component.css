@@ -4,3 +4,22 @@
 .frames {
     width: 50%;
 }
+
+.circle {
+    width: 60px;
+    height: 60px;
+    background: red;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+.boardNode {
+    width: 60px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: large;
+}

@@ -1,21 +1,9 @@
 <div class="d-flex p-2 justify-content-start drawing-boundary flex-column">
-    <div class="d-flex p-2 justify-content-end">
-        <div class="flex-fill"></div>
-        <div class="align-items-center circle" (click)="onCircleClick()">
-            <div class="d-flex align-items-center" style="height: 70px;">
-                <div class="d-flex align-items-center" style="height: 70px;">
-                    <div class="align-self-center">
-                        <div class="boardNode">+</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <ul *ngFor="let nodeLink of nodeLinks">
-        <div class="align-items-center circle" (click)="onCircleClick()" cdkDrag cdkDragBoundary=".drawing-boundary">
+        <div class="align-items-center circle" [class.hide]="nodeLink.nodeOrLink === 'link'" cdkDrag cdkDragBoundary=".drawing-boundary">
             <div class="d-flex align-items-center" style="height: 70px;">
                 <div class="align-self-center">
-                    <input id="drawLabel" [(ngModel)]="nodeLink.label" class="boardNode">
+                    <input id="drawLabel" [(ngModel)]="nodeLink.label" class="boardNode" (change)="onLabelChange(nodeLink)">
                 </div>
             </div>
         </div>

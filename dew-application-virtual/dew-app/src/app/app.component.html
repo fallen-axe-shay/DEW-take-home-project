@@ -10,8 +10,17 @@
       <app-node-link-field></app-node-link-field>
     </div>
     <div class="frames align-self-start p-2">
-      <div class="d-flex flex-row justify-content-between p-2">
-        <div class="align-self-center"><h1>{{diagramFrameTitle}}</h1></div>
+      <div class="d-flex flex-row justify-content-start p-2">
+        <div class="align-self-center flex-fill"><h1>{{diagramFrameTitle}}</h1></div>
+        <div class="align-items-center circle" (click)="onCircleClick()">
+          <div class="d-flex align-items-center" style="height: 60px;">
+              <div class="d-flex align-items-center" style="height: 60px;">
+                  <div class="align-self-center">
+                      <div class="boardNode">+</div>
+                  </div>
+              </div>
+          </div>
+      </div>
       </div>
       <app-drawing-board></app-drawing-board>
     </div>
