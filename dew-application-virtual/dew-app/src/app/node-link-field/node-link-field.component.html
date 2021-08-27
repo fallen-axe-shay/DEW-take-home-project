@@ -1,10 +1,10 @@
 <ul *ngFor="let nodeLink of nodeLinks">
     <div class="d-flex p-2 flex-row">
         <div class="align-self-center">
-            <button type="button" class="btn btn-primary" [class.selected]="nodeLink.nodeOrLink === 'node'" (click)="onSelect(nodeLink, 'node')">Node</button>
+            <button type="button" class="btn btn-secondary" [class.selected]="nodeLink.nodeOrLink === 'node'" (click)="onSelect(nodeLink, 'node')">Node</button>
         </div>
         <div class="align-self-center">
-            <button type="button" class="btn btn-primary" [class.selected]="nodeLink.nodeOrLink === 'link'" (click)="onSelect(nodeLink, 'link')">Link</button>
+            <button type="button" class="btn btn-secondary link" [class.selected]="nodeLink.nodeOrLink === 'link'" (click)="onSelect(nodeLink, 'link')">Link</button>
         </div>
         <div class="vl"></div>
         <div class="align-self-center flex-fill flex-wrap" style="max-width: 270px;"> 
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="align-self-center justify-content-end">
-            <img src="../../assets/svg/circle-x.svg" style="height: 20px; cursor: pointer;" (click)="removeField(nodeLink)"/>
+            <img src="../../assets/svg/circle-x.svg" class="filter-red" style="height: 20px; cursor: pointer;" (click)="removeField(nodeLink)"/>
         </div>
     </div>
 </ul>

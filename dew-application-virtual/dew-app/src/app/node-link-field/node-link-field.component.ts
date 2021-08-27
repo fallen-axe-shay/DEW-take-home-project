@@ -111,8 +111,8 @@ export class NodeLinkFieldComponent implements OnInit {
         A: nodeLink.selectedOptions[0],
         B: nodeLink.selectedOptions[1]
       });
-      drawLines(true);
     }
+    drawLines(true);
   }
 
 }
