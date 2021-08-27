@@ -1,3 +1,4 @@
+import { AfterViewInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { NODES } from './nodeLinkList';
 
@@ -9,10 +10,18 @@ var currentID = 1;
   styleUrls: ['./app.component.css'],
 })
 
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+  
   title = 'DEW App';
   textFrameTitle = 'Configure';
   diagramFrameTitle = 'Board';
+
+  constructor() {}
+
+  ngAfterViewInit(): void {
+
+  }
+
 
   onCircleClick(): void {
     NODES.push(
