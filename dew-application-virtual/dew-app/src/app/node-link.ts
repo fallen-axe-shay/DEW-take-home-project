@@ -1,3 +1,6 @@
+import { ContextMenu, MenuItemModel } from "@syncfusion/ej2-navigations";
+import { ContextMenuModel } from "@syncfusion/ej2-navigations";
+
 export interface NodeLink {
     id: number;
     nodeOrLink: string;
@@ -7,4 +10,5 @@ export interface NodeLink {
     text: string;
     errorExists: Boolean;
     oldValue: string;
+    listContext: Array<MenuItemModel>;
   }

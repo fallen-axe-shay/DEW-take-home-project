@@ -59,6 +59,17 @@ export class NodeLinkFieldComponent implements OnInit {
       }
     }
     updateLines(nodeLink);
+    var listOfNodes = [];
+    for(var i in NODES) {
+      if(NODES[i].nodeOrLink == 'node') {
+        listOfNodes.push({text: NODES[i].label});
+      }
+    }
+    for(var i in NODES) {
+      if(NODES[i].nodeOrLink == 'node') {
+        NODES[i].listContext[0].items = listOfNodes;
+      }
+    }
     set(ref(database, 'nodes'), 
       NODES
     );
@@ -215,6 +226,17 @@ export class NodeLinkFieldComponent implements OnInit {
           //Error condition
           nodeLink.errorExists = true;
           nodeLink.label = '';
+        }
+        var listOfNodes = [];
+        for(var i in NODES) {
+          if(NODES[i].nodeOrLink == 'node') {
+            listOfNodes.push({text: NODES[i].label});
+          }
+        }
+        for(var i in NODES) {
+          if(NODES[i].nodeOrLink == 'node') {
+            NODES[i].listContext[0].items = listOfNodes;
+          }
         }
         set(ref(database, 'nodes'), 
           NODES

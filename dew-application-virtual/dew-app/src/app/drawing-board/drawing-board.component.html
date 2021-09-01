@@ -7,6 +7,6 @@
                 </div>
             </div>
         </div>
-        <ejs-contextmenu id='contextmenu' target='#{{nodeLink.label}}' [items]= 'menuItems' (select)="itemSelect($event)"></ejs-contextmenu>
+        <ejs-contextmenu id='contextmenu' target='#{{nodeLink.label}}' [items]= 'nodeLink.listContext' (select)="itemSelect($event, nodeLink)"></ejs-contextmenu>
     </ul>
 </div>

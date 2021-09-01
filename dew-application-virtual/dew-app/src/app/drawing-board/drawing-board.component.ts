@@ -16,6 +16,8 @@ const database = getDatabase();
 declare let LeaderLine: any;
 var flag = 0;
 
+var idNumber = NODES.length;
+
 var lines: any;
 lines = [];
 
@@ -47,21 +49,37 @@ export class DrawingBoardComponent implements AfterContentChecked  {
 
   nodeLinks = NODES;
 
-  menuItems: MenuItemModel[] = [
-    {
-        text: 'Add Link',
-        items: [{
-          text: 'stuff',
-          id: 'test'
-        }]
-    }];
-
   constructor() {
-
    }
 
-   itemSelect(args: MenuEventArgs): void {
-     console.log("Here")
+   itemSelect(args: MenuEventArgs, nodeLink: NodeLink): void {
+     var selection = args.element.textContent;
+     idNumber = NODES.length;
+     if(selection != 'Add Link' && nodeLink.label!=selection) {
+       //console.log("Do something")
+       NODES.push({
+        id: idNumber,
+        nodeOrLink: 'link', 
+        label: idNumber.toString(),
+        selectedOptions: [],
+        noOfOptions: 0,
+        text: 'Link ' + nodeLink.label + ' ' + selection,
+        errorExists: false,
+        oldValue: '',
+        listContext: [{
+          text: 'Add Link',
+          items: []
+      }]
+      })
+      links.push({id: idNumber, A: nodeLink.label, B: selection});
+      set(ref(database, 'nodes'), 
+          NODES
+        );
+    set(ref(database, 'links'), 
+        links
+      );
+      drawLines(true);
+     }
    }
 
   ngAfterContentChecked(): void {
@@ -121,6 +139,17 @@ export class DrawingBoardComponent implements AfterContentChecked  {
         }
       }
       drawLines(true);
+    }
+    var listOfNodes = [];
+    for(var item in NODES) {
+      if(NODES[item].nodeOrLink == 'node') {
+        listOfNodes.push({text: NODES[item].label});
+      }
+    }
+    for(var item in NODES) {
+      if(NODES[item].nodeOrLink == 'node') {
+        NODES[item].listContext[0].items = listOfNodes;
+      }
     }
     set(ref(database, 'nodes'), 
           NODES

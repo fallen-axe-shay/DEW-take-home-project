@@ -9,8 +9,9 @@ import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, get, set } from "firebase/database";
 import { drawLines } from './drawing-board/drawing-board.component';
 import { links } from './links';
+import { MenuItem, MenuItemModel } from '@syncfusion/ej2-navigations';
 
-var currentID = 1;
+var currentID = 0;
 
 const app = initializeApp(environment.firebaseConfig);
 const analytics = getAnalytics(app);
@@ -44,6 +45,7 @@ export class AppComponent implements AfterViewInit {
         for(var item of data) {
           this.nodeLinks.push(item);
         }
+        currentID = this.nodeLinks.length;
       }
     }).then(() => {
       get(linksRef).then((snapshot) => {
@@ -66,16 +68,32 @@ export class AppComponent implements AfterViewInit {
   onCircleClick(): void {
     NODES.push(
       {
-        id: currentID++,
+        id: currentID,
         nodeOrLink: 'node', 
-        label: '',
+        label: currentID.toString(),
         selectedOptions: [],
         noOfOptions: 0,
-        text: '',
+        text: 'Node ' + currentID,
         errorExists: false,
-        oldValue: ''
+        oldValue: '',
+        listContext: [{
+          text: 'Add Link',
+          items: []
+      }]
       }
     );
+    currentID++;
+    var listOfNodes = [];
+    for(var node in NODES) {
+      if(NODES[node].nodeOrLink == 'node') {
+        listOfNodes.push({text: NODES[node].label});
+      }
+    }
+    for(var node in NODES) {
+      if(NODES[node].nodeOrLink == 'node') {
+        NODES[node].listContext[0].items = listOfNodes;
+      }
+    }
     set(ref(database, 'nodes'), 
       NODES
     );
@@ -87,16 +105,32 @@ export class AppComponent implements AfterViewInit {
   onAddBtnClick(): void {
     NODES.push(
       {
-        id: currentID++,
+        id: currentID,
         nodeOrLink: 'node', 
-        label: '',
+        label: currentID.toString(),
         selectedOptions: [],
         noOfOptions: 0,
-        text: '',
+        text: 'Node ' + currentID,
         errorExists: false,
-        oldValue: ''
+        oldValue: '',
+        listContext: [{
+                text: 'Add Link',
+                items: []
+            }]
       }
     );
+    currentID++;
+    var listOfNodes = [];
+    for(var node in NODES) {
+      if(NODES[node].nodeOrLink == 'node') {
+        listOfNodes.push({text: NODES[node].label});
+      }
+    }
+    for(var node in NODES) {
+      if(NODES[node].nodeOrLink == 'node') {
+        NODES[node].listContext[0].items = listOfNodes;
+      }
+    }
     set(ref(database, 'nodes'), 
       NODES
     );
@@ -105,5 +139,3 @@ export class AppComponent implements AfterViewInit {
     );
   }
 }
-
-//export { currentID };
