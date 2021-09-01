@@ -9,6 +9,11 @@ import { FormsModule } from "@angular/forms";
 import { DrawingBoardComponent } from './drawing-board/drawing-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ContextMenuComponent, ContextMenuModule } from '@syncfusion/ej2-angular-navigations';
+import { enableRipple } from '@syncfusion/ej2-base';
+
+enableRipple(true);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     AppRoutingModule,
     DragDropModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ContextMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

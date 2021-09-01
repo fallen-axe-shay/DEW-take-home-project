@@ -8,6 +8,9 @@ import 'leader-line';
 import { getDatabase, ref, onValue, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { environment } from '../../environments/environment';
+ 
+import { MenuItemModel, MenuEventArgs } from '@syncfusion/ej2-navigations';
+
 const app = initializeApp(environment.firebaseConfig);
 const database = getDatabase();
 declare let LeaderLine: any;
@@ -33,6 +36,7 @@ function drawLines(fromAddLink: Boolean) {
   } 
 }
 
+
 @Component({
   selector: 'app-drawing-board',
   templateUrl: './drawing-board.component.html',
@@ -43,8 +47,21 @@ export class DrawingBoardComponent implements AfterContentChecked  {
 
   nodeLinks = NODES;
 
+  menuItems: MenuItemModel[] = [
+    {
+        text: 'Add Link',
+        items: [{
+          text: 'stuff',
+          id: 'test'
+        }]
+    }];
+
   constructor() {
 
+   }
+
+   itemSelect(args: MenuEventArgs): void {
+     console.log("Here")
    }
 
   ngAfterContentChecked(): void {

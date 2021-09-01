@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@syncfusion/ej2-angular-navigations": "^19.2.59",
     "firebase": "^9.0.1",
     "jquery": "^3.6.0",
     "leader-line": "^1.0.5",
