@@ -115,4 +115,90 @@ export class NodeLinkFieldComponent implements OnInit {
     drawLines(true);
   }
 
+  //New Code
+
+  onModelChange(event: string, nodeLink: NodeLink) {
+      try {
+        var temp = event.trim().split(/\s+/);
+        if(temp[0].toLocaleLowerCase() == 'node' && temp.length == 2) {
+          nodeLink.oldValue = nodeLink.text;
+          nodeLink.text = event;
+          nodeLink.text = 'Node ' + temp[1];
+          nodeLink.errorExists = false;
+          nodeLink.label = temp[1];
+          nodeLink.nodeOrLink = 'node';
+          var oldTemp = nodeLink.oldValue.split(/\s+/);
+          for(var node in this.nodeLinks) {
+            if(this.nodeLinks[node].nodeOrLink == 'link') {
+              var nodeTemp = this.nodeLinks[node].text.split(/\s+/);
+              if(nodeTemp[1] == oldTemp[1]) {
+                this.nodeLinks[node].text = 'Link ' + temp[1] + ' ' + nodeTemp[2]; 
+              }
+              if(nodeTemp[2] == oldTemp[1]) {
+                this.nodeLinks[node].text = 'Link ' + nodeTemp[1] + ' ' + temp[1]; 
+              }
+            }
+          }
+          for(var index=0; index<links.length; index++) {
+            if(links[index]['A'] == oldTemp[1]) {
+              links[index]['A'] = temp[1];
+            }
+            if(links[index]['B'] == oldTemp[1]) {
+              links[index]['B'] = temp[1];
+            }
+          }
+          if(nodeLink.label == null) {
+            nodeLink.label = '';
+            updateLines(nodeLink);
+          }
+          nodeLink.oldValue = nodeLink.text;
+        } else if(temp[0].toLocaleLowerCase() == 'link' && temp.length == 3) {
+          nodeLink.text = 'Link ' + temp[1] + ' ' + temp[2];
+          nodeLink.errorExists = false;
+          nodeLink.nodeOrLink = 'link';
+          var node1Found = false, node2Found = false;
+          for(var node in this.nodeLinks) {
+            if(this.nodeLinks[node].text == 'Link ' + temp[2] + ' ' + temp[1]) {
+              node1Found = false;
+            }
+            if(this.nodeLinks[node].label == temp[1]) {
+              node1Found = true;
+            }
+            if(this.nodeLinks[node].label == temp[2]) {
+              node2Found = true;
+            }
+          }
+          if(node1Found && node2Found) {
+            var id = nodeLink.id;
+            for (var key in options) {
+              if(key == id.toString()) {
+                delete options[key];
+              }
+            }
+            nodeLink.label = '';
+            for(var index = 0; index<links.length; index++) {
+              if(links[index]['id'] == nodeLink.id) {
+                links.splice(index, 1);
+                break;
+              }
+            }
+            links.push({
+              id: nodeLink.id,
+              A: temp[1],
+              B: temp[2]
+            });
+            drawLines(true);
+          } else {
+            nodeLink.errorExists = true;
+        }
+        } else {
+          //Error condition
+          nodeLink.errorExists = true;
+        }
+      } catch (exception) {
+        //Error condition
+        console.log(exception)
+        nodeLink.errorExists = true;
+      }  
+  }
 }

@@ -4,4 +4,7 @@ export interface NodeLink {
     label: string;
     selectedOptions: Array<any>;
     noOfOptions: number;
+    text: string;
+    errorExists: Boolean;
+    oldValue: string;
   }

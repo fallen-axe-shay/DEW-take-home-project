@@ -6,6 +6,9 @@ export var NODES: NodeLink[] = [
         nodeOrLink: 'node',
         label: '',
         selectedOptions: [],
-        noOfOptions: 0
+        noOfOptions: 0,
+        text: '',
+        errorExists: false,
+        oldValue: ''
     }
 ]

@@ -30,7 +30,10 @@ export class AppComponent implements AfterViewInit {
         nodeOrLink: 'node', 
         label: '',
         selectedOptions: [],
-        noOfOptions: 0
+        noOfOptions: 0,
+        text: '',
+        errorExists: false,
+        oldValue: ''
       }
     );
   }
@@ -42,7 +45,10 @@ export class AppComponent implements AfterViewInit {
         nodeOrLink: 'node', 
         label: '',
         selectedOptions: [],
-        noOfOptions: 0
+        noOfOptions: 0,
+        text: '',
+        errorExists: false,
+        oldValue: ''
       }
     );
   }

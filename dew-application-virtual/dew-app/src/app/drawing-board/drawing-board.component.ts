@@ -48,19 +48,54 @@ export class DrawingBoardComponent implements AfterContentChecked  {
 
   onLabelChange(nodeLink: NodeLink): void {
     if(nodeLink.label!='') {
+      nodeLink.text = 'Node ' + nodeLink.label;
       for(let item in options) {
         if(nodeLink.label == options[item]) {
           nodeLink.label = '';
           options[nodeLink.id] && delete options[nodeLink.id];
         }
       }
+      var temp = nodeLink.oldValue.split(/\s+/);
+      for(var node in this.nodeLinks) {
+        if(this.nodeLinks[node].nodeOrLink == 'link') {
+          var nodeTemp = this.nodeLinks[node].text.split(/\s+/);
+          if(nodeTemp[1] == temp[1]) {
+            this.nodeLinks[node].text = 'Link ' + nodeLink.label + ' ' + nodeTemp[2]; 
+          }
+          if(nodeTemp[2] == temp[1]) {
+            this.nodeLinks[node].text = 'Link ' + nodeTemp[1] + ' ' + nodeLink.label; 
+          }
+        }
+        for(var index=0; index<links.length; index++) {
+          if(links[index]['A'] == temp[1]) {
+            links[index]['A'] = nodeLink.label;
+          }
+          if(links[index]['B'] == temp[1]) {
+            links[index]['B'] = nodeLink.label;
+          }
+        }
+      }
+      nodeLink.oldValue = nodeLink.text;
       nodeLink.label && (options[nodeLink.id] = nodeLink.label);
     } else {
+      nodeLink.text = 'Node';
       options[nodeLink.id] && delete options[nodeLink.id];
       for(var index = 0; index<links.length; index++) {
         if(links[index].id==nodeLink.id || links[index].A == nodeLink.label || links[index].B == nodeLink.label) {
           links.splice(index, 1);
           index--;
+        }
+      }
+      for(var node in this.nodeLinks) {
+        if(this.nodeLinks[node].nodeOrLink == 'link') {
+          var temp = nodeLink.oldValue.split(/\s+/);
+          var nodeTemp = this.nodeLinks[node].text.split(/\s+/);
+          if(nodeTemp[1] == temp[1]) {
+            this.nodeLinks[node].text = ''; 
+          }
+          if(nodeTemp[2] == temp[1]) {
+            this.nodeLinks[node].text = ''; 
+          }
         }
       }
       drawLines(true);

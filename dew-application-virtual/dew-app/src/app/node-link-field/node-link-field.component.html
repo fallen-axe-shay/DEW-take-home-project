@@ -1,5 +1,8 @@
 <ul *ngFor="let nodeLink of nodeLinks">
-    <div class="d-flex p-2 flex-row">
+
+    <!--Old Code-->
+
+    <div class="d-flex p-2 flex-row hide">
         <div class="align-self-center">
             <button type="button" class="btn btn-secondary" [class.selected]="nodeLink.nodeOrLink === 'node'" (click)="onSelect(nodeLink, 'node')">Node</button>
         </div>
@@ -22,6 +25,25 @@
         </div>
         <div class="align-self-center justify-content-end">
             <img src="../../assets/svg/circle-x.svg" class="filter-red" style="height: 20px; cursor: pointer;" (click)="removeField(nodeLink)"/>
+        </div>
+    </div>
+
+    <!--New Code-->
+
+    <div class="d-flex p-2 flex-row">
+        <div class="align-self-center flex-fill p-2">
+            <input type="text" class="form-control" (ngModelChange)="onModelChange($event, nodeLink);" [ngModel]="nodeLink.text" placeholder="Enter Text Here">
+        </div>
+        <div class="align-self-center justify-content-end p-2">
+            <img src="../../assets/svg/circle-x.svg" class="filter-red" style="height: 20px; cursor: pointer;" (click)="removeField(nodeLink)"/>
+        </div>
+    </div>
+    <div class="d-flex p-2 flex-row" [class.hide]="nodeLink.errorExists === false">
+        <div class="align-self-center justify-content-start">
+            <img src="../../assets/svg/warning.svg" class="filter-red" style="height: 20px; cursor: pointer; margin-right: 10px;" (click)="removeField(nodeLink)"/>
+        </div>
+        <div class="align-self-center justify-content-start">
+            <div style="color: rgb(77, 77, 77);">An error has occured. Kindly check the text entered in the field.</div>
         </div>
     </div>
 </ul>
