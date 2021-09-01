@@ -4,6 +4,12 @@ import { NodeLink } from '../node-link';
 import { NODES } from '../nodeLinkList';
 import { options } from '../nodeOptions';
 import { drawLines } from '../drawing-board/drawing-board.component';
+import { initializeApp } from '@firebase/app';
+import { getDatabase, ref, onValue, set } from "firebase/database";
+import { environment } from '../../environments/environment';
+
+const app = initializeApp(environment.firebaseConfig);
+const database = getDatabase();
 
 function updateLines(nodeLink: NodeLink) {
   for(var index = 0; index<links.length; index++) {
@@ -53,6 +59,12 @@ export class NodeLinkFieldComponent implements OnInit {
       }
     }
     updateLines(nodeLink);
+    set(ref(database, 'nodes'), 
+      NODES
+    );
+    set(ref(database, 'links'), 
+      links
+    );
   }
 
   onLabelChange(nodeLink: NodeLink): void {
@@ -125,6 +137,14 @@ export class NodeLinkFieldComponent implements OnInit {
           nodeLink.text = event;
           nodeLink.text = 'Node ' + temp[1];
           nodeLink.errorExists = false;
+
+          //Check if Node Exists
+          for(var item of NODES) {
+            if(item.label == temp[1]) {
+              throw new Error("Node Exists");
+            }
+          }
+
           nodeLink.label = temp[1];
           nodeLink.nodeOrLink = 'node';
           var oldTemp = nodeLink.oldValue.split(/\s+/);
@@ -194,11 +214,19 @@ export class NodeLinkFieldComponent implements OnInit {
         } else {
           //Error condition
           nodeLink.errorExists = true;
+          nodeLink.label = '';
         }
+        set(ref(database, 'nodes'), 
+          NODES
+        );
+        set(ref(database, 'links'), 
+          links
+        );
       } catch (exception) {
         //Error condition
         console.log(exception)
         nodeLink.errorExists = true;
+        nodeLink.label = '';
       }  
   }
 }

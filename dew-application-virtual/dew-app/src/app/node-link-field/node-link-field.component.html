@@ -13,7 +13,7 @@
         <div class="align-self-center flex-fill flex-wrap" style="max-width: 270px;"> 
             <div [class.hide]="nodeLink.nodeOrLink === 'link'">
                 <label for="label">Label:</label> 
-                <input id="label" [(ngModel)]="nodeLink.label" placeholder="Label" (change)="onLabelChange(nodeLink)">
+                <input [(ngModel)]="nodeLink.label" placeholder="Label" (change)="onLabelChange(nodeLink)">
             </div>
             <div [class.hide]="nodeLink.nodeOrLink === 'node'">
                 <div class="d-flex flex-row flex-wrap">

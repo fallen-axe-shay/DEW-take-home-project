@@ -5,6 +5,11 @@ import * as $ from 'jquery';
 import { options } from '../nodeOptions';
 import { links } from '../links';
 import 'leader-line';
+import { getDatabase, ref, onValue, set } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { environment } from '../../environments/environment';
+const app = initializeApp(environment.firebaseConfig);
+const database = getDatabase();
 declare let LeaderLine: any;
 var flag = 0;
 
@@ -100,6 +105,12 @@ export class DrawingBoardComponent implements AfterContentChecked  {
       }
       drawLines(true);
     }
+    set(ref(database, 'nodes'), 
+          NODES
+        );
+    set(ref(database, 'links'), 
+        links
+      );
   }
 
   onDragStart(): void {

@@ -1,14 +1,14 @@
 import { NodeLink } from "./node-link";
 
 export var NODES: NodeLink[] = [
-    {
-        id: 0,
-        nodeOrLink: 'node',
-        label: '',
-        selectedOptions: [],
-        noOfOptions: 0,
-        text: '',
-        errorExists: false,
-        oldValue: ''
-    }
+    // {
+    //     id: 0,
+    //     nodeOrLink: 'node',
+    //     label: '',
+    //     selectedOptions: [],
+    //     noOfOptions: 0,
+    //     text: '',
+    //     errorExists: false,
+    //     oldValue: ''
+    // }
 ]

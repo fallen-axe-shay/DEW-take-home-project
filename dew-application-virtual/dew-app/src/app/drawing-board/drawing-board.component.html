@@ -3,7 +3,7 @@
         <div class="align-items-center circle" id={{nodeLink.label}} [class.hide]="nodeLink.nodeOrLink === 'link'" cdkDrag cdkDragBoundary=".drawing-boundary" (cdkDragStarted)="onDragStart()" (cdkDragReleased)="onDragStopped()">
             <div class="d-flex align-items-center" style="height: 70px;">
                 <div class="align-self-center">
-                    <input id="drawLabel" [(ngModel)]="nodeLink.label" class="boardNode" (change)="onLabelChange(nodeLink)">
+                    <input [(ngModel)]="nodeLink.label" class="boardNode" (change)="onLabelChange(nodeLink)">
                 </div>
             </div>
         </div>
