@@ -17,5 +17,9 @@
 5. Your browser window should open up automatically. If not, use the address and portnumber specified in the command (http://localhost:4201/ in this case).
  
 ## Application Demo
+ 
+### Version 1
 ![screen-capture (2)](https://user-images.githubusercontent.com/89501492/131195638-0e35e5d9-fa52-440d-aa84-d0450f3cef35.gif)
 
+### Version 2
+![screen-capture (2) (1)](https://user-images.githubusercontent.com/89501492/131789631-afd9f2c4-6b6a-4ba6-999c-535752c8294a.gif)
