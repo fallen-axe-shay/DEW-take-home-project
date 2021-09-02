@@ -9,7 +9,7 @@ import { getDatabase, ref, onValue, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { environment } from '../../environments/environment';
  
-import { MenuItemModel, MenuEventArgs } from '@syncfusion/ej2-navigations';
+import { MenuItemModel, MenuEventArgs, BeforeOpenCloseMenuEventArgs, ContextMenu } from '@syncfusion/ej2-navigations';
 
 const app = initializeApp(environment.firebaseConfig);
 const database = getDatabase();
@@ -52,11 +52,33 @@ export class DrawingBoardComponent implements AfterContentChecked  {
   constructor() {
    }
 
+  //  beforeOpen(args: BeforeOpenCloseMenuEventArgs, nodeLink: NodeLink) {
+  //    if(args.parentItem!=null) {
+  //     console.log(args.items)
+  //     var max = 0;
+  //     var pos = 0;
+  //     for(var node in NODES) {
+  //       (max > NODES[node].listContext.length) ? max = max : (max = NODES[node].listContext.length && (pos = parseInt(node)));
+  //     }
+  //     args.items = NODES[pos].listContext;
+  //    }
+  //  }
+
    itemSelect(args: MenuEventArgs, nodeLink: NodeLink): void {
+    //console.log(nodeLink.label)
      var selection = args.element.textContent;
      idNumber = NODES.length;
      if(selection != 'Add Link' && nodeLink.label!=selection) {
-       //console.log("Do something")
+      var listOfNodes = [];
+      for(var node in NODES) {
+        if(NODES[node].nodeOrLink == 'node') {
+          listOfNodes.push({text: NODES[node].label});
+        }
+      }
+      var listContext = [{
+        text: 'Add Link',
+        items: listOfNodes
+    }];
        NODES.push({
         id: idNumber,
         nodeOrLink: 'link', 
@@ -66,10 +88,7 @@ export class DrawingBoardComponent implements AfterContentChecked  {
         text: 'Link ' + nodeLink.label + ' ' + selection,
         errorExists: false,
         oldValue: '',
-        listContext: [{
-          text: 'Add Link',
-          items: []
-      }]
+        listContext: listContext
       })
       links.push({id: idNumber, A: nodeLink.label, B: selection});
       set(ref(database, 'nodes'), 

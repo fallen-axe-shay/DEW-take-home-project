@@ -9,7 +9,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, get, set } from "firebase/database";
 import { drawLines } from './drawing-board/drawing-board.component';
 import { links } from './links';
-import { MenuItem, MenuItemModel } from '@syncfusion/ej2-navigations';
+import { MenuItem, MenuItemModel, ContextMenu } from '@syncfusion/ej2-navigations';
 
 var currentID = 0;
 
