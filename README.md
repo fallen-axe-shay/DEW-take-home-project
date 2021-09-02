@@ -5,10 +5,11 @@
 
 ### Using GitHub
 1. Pull the repository onto your machine.
-2. Make sure you have angular CLI, NODEJS, and other relevant packages on your machine.
+2. Make sure you have Angular CLI, NODEJS, and other relevant packages on your machine.
 3. Change the current directory to <Pulled Repo>/dew-application-virtual/dew-app.
-4. Run the command 'ng --open serve'
-5. Your browser window should open up automatically. If not, use the address and portnumber specified on the command prompt.
+4. Run the command 'npm install'.
+5. Run the command 'ng --open serve'
+6. Your browser window should open up automatically. If not, use the address and portnumber specified on the command prompt.
  
 ### Using Docker
 1. Install the Docker CLI on your machine.
